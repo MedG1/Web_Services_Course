@@ -1,7 +1,9 @@
 package tn.example.samplews.entities;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
@@ -13,7 +15,9 @@ import java.util.Set;
 public class Country extends SimplePKEntity<Short>{
     @Column(nullable = false, unique = true)
     private String country;
-    @OneToMany(mappedBy = "country") //country is the attribute of the City class
+    @XmlTransient
+    @JsonbTransient
+    @OneToMany(mappedBy = "country", fetch = FetchType.EAGER) //country is the attribute of the City class
     private Set<City> cities = new HashSet<>();
 
 
@@ -45,12 +49,12 @@ public class Country extends SimplePKEntity<Short>{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Country country1 = (Country) o;
-        return country.equals(country1.country) && cities.equals(country1.cities);
+        return country.equals(country1.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), country, cities);
+        return Objects.hash(super.hashCode(), country);
     }
 
     @Override
@@ -58,7 +62,6 @@ public class Country extends SimplePKEntity<Short>{
         return "{" +
                 "\"super\":" + super.toString() +
                 ", \"country\":\"" + country + '\"' +
-                ", \"cities\":" + Arrays.deepToString(cities.toArray()) +
                 '}';
     }
 }

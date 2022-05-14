@@ -9,7 +9,7 @@ import java.util.Objects;
 @AttributeOverride(name = "id", column = @Column(name = "city_id", columnDefinition = "SMALLINT UNSIGNED")) //columnDefinition optional
 public class City extends SimplePKEntity<Integer>{
     private String city;
-    @ManyToOne //many cities to one country
+    @ManyToOne(fetch = FetchType.EAGER) //many cities to one country
     @JoinColumn(name = "country_id", columnDefinition = "TINYINT UNSIGNED", referencedColumnName = "country_id", nullable = false)
     private Country country;
 

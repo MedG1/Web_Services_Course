@@ -10,5 +10,10 @@ public class TestArgon2 {
     public void testHash(){
         assertTrue(Argon2Utility.check(Argon2Utility.hash("testpw".toCharArray()), "testpw".toCharArray()));
         assertFalse(Argon2Utility.check(Argon2Utility.hash("testpw".toCharArray()), "testpkw".toCharArray()));
+        System.out.println(Argon2Utility.hash("testpw".toCharArray()));
     }
+
+
 }
+
+

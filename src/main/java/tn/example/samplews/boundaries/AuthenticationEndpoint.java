@@ -3,6 +3,7 @@ package tn.example.samplews.boundaries;
 import com.sun.net.httpserver.Headers;
 import jakarta.ejb.EJB;
 import jakarta.ejb.EJBException;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
 import static jakarta.ws.rs.core.HttpHeaders.WWW_AUTHENTICATE;
 
 @Path("/")
+@RequestScoped
 public class AuthenticationEndpoint {
     @Inject
     private Logger log;

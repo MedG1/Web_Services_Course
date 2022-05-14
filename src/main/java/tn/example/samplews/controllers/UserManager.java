@@ -53,5 +53,15 @@ public class UserManager implements GenericDAO<User, Long>{
         return roles.toArray(new Role[0]);
     }
 
-    //TODO: hasRole(), addRole(), removeRole()
+    public boolean hasRole(User user, Role role){
+        return (user.getPermissionLevel() & role.getValue()) != 0L;
+    }
+
+    public void addRole(User user, Role role){
+        user.setPermissionLevel(user.getPermissionLevel() | role.getValue());
+    }
+
+    public void removeRole(User user, Role role){
+        user.setPermissionLevel(user.getPermissionLevel() & (~role.getValue()));
+    }
 }
